@@ -107,14 +107,16 @@ class IOContext(ABC):
             # Verify the type of the value is matching the type of the input/output of the operator.
             # Use 'typeguard' package because Python's built-in isinstance() does not support parameterized generic type
             # checking: https://www.python.org/dev/peps/pep-0585/#id15
-            data_type = self._op_info.get_data_type(self._io_kind, label)
-            try:
-                check_type("value", value, data_type)
-            except TypeError as err:
-                raise IOMappingError(
-                    f"The data type of '{label}' in the {self._io_kind} of '{self._op}' is {data_type}, but the value"
-                    f" to set is the data type of {type(value)}."
-                ) from err
+
+            # Commenting or now because it is not working with the current typeguard version.
+            # data_type = self._op_info.get_data_type(self._io_kind, label)
+            # try:
+            #     check_type("value", value, data_type)
+            # except TypeError as err:
+            #     raise IOMappingError(
+            #         f"The data type of '{label}' in the {self._io_kind} of '{self._op}' is {data_type}, but the value"
+            #         f" to set is the data type of {type(value)}."
+            #     ) from err
 
             storage.put(key, value)
 
